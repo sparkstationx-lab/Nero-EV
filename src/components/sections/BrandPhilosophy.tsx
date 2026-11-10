@@ -1,6 +1,6 @@
 import React from 'react';
-import { Award, Globe, Shield, Sparkles } from 'lucide-react';
-import { SHOWROOM_IMAGE } from '../../data/placeholderData';
+import { BRAND, CHARGING_IMAGE } from '../../data/officialData';
+import { Heart, ShieldCheck, Leaf, Users } from 'lucide-react';
 
 export const BrandPhilosophy: React.FC = () => {
   return (
@@ -11,54 +11,39 @@ export const BrandPhilosophy: React.FC = () => {
             <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6F36B] font-mono mb-3">
               <span>06. BRAND PHILOSOPHY</span>
               <span aria-hidden="true">·</span>
-              <span>VISION & VALUES</span>
+              <span>EVSUNDAK IDENTITY</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
-              [BRAND HEADLINE] <br />
-              REDEFINING INDIAN AUTOMOTIVE LUXURY
+              BHARAT KI APNI ELECTRIC CAR
             </h2>
             <p className="text-[#F7F7F5]/80 text-base sm:text-lg leading-relaxed mb-6 font-light">
-              [COMPANY INFORMATION] — NERO EV was born out of a ambition: to design, engineer, and build electric performance vehicles in India that challenge world-class luxury standards.
-            </p>
-            <p className="text-[#777777] text-sm leading-relaxed mb-8">
-              [COMPANY STORY PLACEHOLDER] · Grounded in zero-emission sustainability, precision manufacturing, and customer-first experience hubs across major metro centers.
+              {BRAND.positioning} {BRAND.philosophy} NERO EV was created to provide practical, reliable, and accessible zero-emission transportation tailored to the everyday needs of Indian families.
             </p>
 
-            <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded bg-[#C6F36B]/10 text-[#C6F36B] flex items-center justify-center shrink-0 mt-0.5">
-                  <Globe className="w-4 h-4" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+              {BRAND.values.map((val, idx) => (
+                <div key={idx} className="flex items-center gap-2.5 text-xs font-semibold text-white/90">
+                  <div className="w-6 h-6 rounded bg-[#C6F36B]/10 text-[#C6F36B] flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                  </div>
+                  <span>{val}</span>
                 </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white mb-1">Zero Tailpipe Emissions</h4>
-                  <p className="text-xs text-[#777777]">[COMPANY INFORMATION]</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded bg-[#C6F36B]/10 text-[#C6F36B] flex items-center justify-center shrink-0 mt-0.5">
-                  <Award className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-white mb-1">Bespoke Excellence</h4>
-                  <p className="text-xs text-[#777777]">[COMPANY INFORMATION]</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-4/3 group shadow-2xl">
               <img
-                src={SHOWROOM_IMAGE}
-                alt="NERO EV Experience Center Flagship Hub"
+                src={CHARGING_IMAGE}
+                alt="NERO EV Family Home Charging Convenience"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-xs text-white">
-                <span className="font-mono text-[#C6F36B] uppercase font-bold">[EXPERIENCE CENTER SHOWROOM]</span>
-                <span className="text-[#777777] font-mono">FLAGSHIP STORE</span>
+                <span className="font-mono text-[#C6F36B] uppercase font-bold">SUSTAINABLE FAMILY MOBILITY</span>
+                <span className="text-[#777777] font-mono">EVSUNDAK</span>
               </div>
             </div>
           </div>

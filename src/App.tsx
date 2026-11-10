@@ -8,19 +8,19 @@ import { AboutPage } from './pages/AboutPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
 import { BookNowPage } from './pages/BookNowPage';
+import { EmiCalculatorPage } from './pages/EmiCalculatorPage';
 import { TestDriveModal } from './components/sections/TestDriveModal';
 import { ScrollToTopButton } from './components/common/ScrollToTop';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
-  const [selectedVariantId, setSelectedVariantId] = useState<string | undefined>(undefined);
   const [testDriveOpen, setTestDriveOpen] = useState<boolean>(false);
 
   // Sync page state with window location hash if present
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '') as PageId;
-      if (['home', 'vehicle', 'about', 'gallery', 'contact', 'book'].includes(hash)) {
+      if (['home', 'vehicle', 'about', 'gallery', 'contact', 'book', 'emi'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -30,11 +30,8 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const navigateTo = (page: PageId, variantId?: string) => {
+  const navigateTo = (page: PageId) => {
     setCurrentPage(page);
-    if (variantId) {
-      setSelectedVariantId(variantId);
-    }
     window.location.hash = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -74,6 +71,12 @@ export default function App() {
             onOpenTestDrive={() => setTestDriveOpen(true)}
           />
         )}
+        {currentPage === 'emi' && (
+          <EmiCalculatorPage
+            onNavigate={navigateTo}
+            onOpenTestDrive={() => setTestDriveOpen(true)}
+          />
+        )}
         {currentPage === 'contact' && (
           <ContactPage
             onOpenTestDrive={() => setTestDriveOpen(true)}
@@ -82,7 +85,6 @@ export default function App() {
         )}
         {currentPage === 'book' && (
           <BookNowPage
-            initialVariantId={selectedVariantId}
             onNavigateHome={() => navigateTo('home')}
           />
         )}

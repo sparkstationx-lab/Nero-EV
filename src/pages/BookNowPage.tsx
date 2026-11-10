@@ -3,12 +3,10 @@ import { BookingWorkflow } from '../components/sections/BookingWorkflow';
 import { PageId } from '../types';
 
 interface BookNowPageProps {
-  initialVariantId?: string;
   onNavigateHome: () => void;
 }
 
 export const BookNowPage: React.FC<BookNowPageProps> = ({
-  initialVariantId,
   onNavigateHome,
 }) => {
   return (
@@ -30,7 +28,6 @@ export const BookNowPage: React.FC<BookNowPageProps> = ({
 
         {/* Multi-Step Interactive Workflow */}
         <BookingWorkflow
-          initialVariantId={initialVariantId}
           onNavigateHome={onNavigateHome}
         />
       </section>

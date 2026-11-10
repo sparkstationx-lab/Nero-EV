@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Send, CheckCircle2, MessageSquare, Phone } from 'lucide-react';
+import { BRAND } from '../../data/officialData';
 
 export const EnquiryForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -24,8 +25,8 @@ export const EnquiryForm: React.FC = () => {
             <CheckCircle2 className="w-8 h-8" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-2">Enquiry Transmitted</h3>
-          <p className="text-sm text-[#777777] max-w-md mx-auto mb-6">
-            Thank you for reaching out to NERO EV. Our customer relations team will respond via email within 12 business hours.
+          <p className="text-xs text-[#777777] max-w-md mx-auto mb-6 leading-relaxed">
+            Thank you for contacting NERO EV. Our customer relations team will contact you directly via your provided mobile number or email.
           </p>
           <button
             onClick={() => setSubmitted(false)}
@@ -38,17 +39,19 @@ export const EnquiryForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-1">
-              [CONTACT INFORMATION: CUSTOMER ENQUIRY]
+              OFFICIAL CONTACT FORM
             </span>
-            <h3 className="text-2xl font-extrabold text-white mb-2">Send an Enquiry</h3>
+            <h3 className="text-2xl font-extrabold text-white mb-2">Send NERO EV an Enquiry</h3>
             <p className="text-xs text-[#777777]">
-              Have questions regarding vehicle specifications, experience center visits, or fleet pre-orders? Send us a message below.
+              Have questions regarding NERO EV Executive, charging, or test drives? Speak to us directly at <span className="text-white font-mono font-bold">{BRAND.officialPhone}</span> or submit your message below.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase text-white mb-1.5">Full Name</label>
+              <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                Full Name <span className="text-[#C6F36B]">*</span>
+              </label>
               <input
                 type="text"
                 required
@@ -60,7 +63,9 @@ export const EnquiryForm: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase text-white mb-1.5">Email Address</label>
+              <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                Email Address <span className="text-[#C6F36B]">*</span>
+              </label>
               <input
                 type="email"
                 required
@@ -74,14 +79,17 @@ export const EnquiryForm: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase text-white mb-1.5">Phone Number</label>
+              <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                Mobile Number <span className="text-[#C6F36B]">*</span>
+              </label>
               <input
                 type="tel"
                 required
+                maxLength={10}
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                placeholder="+91 98765 43210"
-                className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
+                placeholder="10-digit mobile"
+                className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none font-mono transition-colors"
               />
             </div>
 
@@ -93,21 +101,23 @@ export const EnquiryForm: React.FC = () => {
                 className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
               >
                 <option value="General Enquiry">General Product Enquiry</option>
-                <option value="Dealership / Partner">Dealership / Franchise Opportunity</option>
-                <option value="Fleet Order">Corporate / Fleet Pre-Order</option>
-                <option value="Press / Media">Press & Media Relations</option>
+                <option value="Test Drive">Test Drive Request</option>
+                <option value="Dealership / Partner">Dealership Opportunity</option>
+                <option value="Fleet Order">Corporate / Fleet Order</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase text-white mb-1.5">Message / Details</label>
+            <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+              Message <span className="text-[#C6F36B]">*</span>
+            </label>
             <textarea
               rows={4}
               required
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              placeholder="Provide specific details about your query..."
+              placeholder="Provide details about your query..."
               className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
             />
           </div>

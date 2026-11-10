@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { HERO_IMAGE, INTERIOR_IMAGE } from '../data/placeholderData';
+import React from 'react';
+import { HERO_IMAGE, INTERIOR_IMAGE, EXECUTIVE_VARIANT } from '../data/officialData';
 import { VehicleColorCustomizer } from '../components/sections/VehicleColorCustomizer';
 import { PerformanceShowcase } from '../components/sections/PerformanceShowcase';
-import { InteractiveRangeCalculator } from '../components/sections/InteractiveRangeCalculator';
 import { SpecificationTable } from '../components/sections/SpecificationTable';
 import { AvailableVariants } from '../components/sections/AvailableVariants';
+import { EmiCalculator } from '../components/sections/EmiCalculator';
 import { CustomerEnquiryCTA } from '../components/sections/CustomerEnquiryCTA';
 import { PageId } from '../types';
-import { ChevronRight } from 'lucide-react';
 
 interface VehiclePageProps {
-  onNavigate: (page: PageId, variantId?: string) => void;
+  onNavigate: (page: PageId) => void;
   onOpenTestDrive: () => void;
 }
 
@@ -22,29 +21,29 @@ export const VehiclePage: React.FC<VehiclePageProps> = ({ onNavigate, onOpenTest
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6F36B] font-mono mb-3">
-              <span>VEHICLE ARCHITECTURE & SPECS</span>
+              <span>PRODUCT OVERVIEW</span>
               <span aria-hidden="true">·</span>
-              <span>PHASE 1 BLUEPRINT</span>
+              <span>OFFICIAL PRODUCT SPECIFICATIONS</span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-4">
-              [BRAND HEADLINE] ARCHITECTURE
+              NERO EV EXECUTIVE
             </h1>
             <p className="text-[#F7F7F5]/80 text-lg font-light leading-relaxed">
-              [VEHICLE DESCRIPTION] · Explore exterior aerodynamics, interior digital cockpit, dual-motor powertrain performance, and structured technical specifications.
+              Bharat Ki Apni Electric Car. Listed at <span className="text-[#C6F36B] font-mono font-bold">{EXECUTIVE_VARIANT.priceFormatted}</span> on the official website. Compact 4-seater electric mobility with 150–200 km range.
             </p>
           </div>
 
           <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-2xl mb-16">
             <img
               src={HERO_IMAGE}
-              alt="NERO EV Vehicle Showcase"
+              alt="NERO EV Executive Urban Electric Car"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-xs font-mono text-white">
-              <span className="text-[#C6F36B] font-bold">[VEHICLE IMAGE PLACEHOLDER]</span>
-              <span className="text-[#777777]">EXTERIOR VIEW 01</span>
+              <span className="text-[#C6F36B] font-bold">NERO EV EXECUTIVE MODEL</span>
+              <span className="text-[#777777]">OFFICIAL PRODUCT PHOTOGRAPH</span>
             </div>
           </div>
         </div>
@@ -55,26 +54,26 @@ export const VehiclePage: React.FC<VehiclePageProps> = ({ onNavigate, onOpenTest
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-2">01. EXTERIOR OVERVIEW</span>
-              <h2 className="text-3xl font-extrabold text-white mb-4">AERODYNAMIC INTEGRITY</h2>
+              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-2">01. EXTERIOR STANCE</span>
+              <h2 className="text-3xl font-extrabold text-white mb-4">COMPACT URBAN PROFILE</h2>
               <p className="text-[#777777] text-sm leading-relaxed mb-6">
-                [VEHICLE DESCRIPTION] · Flush automatic pop-out door handles, active lower airflow shutters, and full-length underbody cladding deliver exceptional highway range efficiency.
+                Designed for city agility, easy parking, and maneuvering through congested Indian roads. Features power-adjustable ORVM and front & rear disc brakes.
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs font-mono border-t border-white/10 pt-4">
                 <div>
-                  <span className="text-[#777777] block">Drag Coefficient:</span>
-                  <span className="text-[#C6F36B] font-bold">[SPECIFICATION VALUE]</span>
+                  <span className="text-[#777777] block">Top Speed:</span>
+                  <span className="text-[#C6F36B] font-bold">{EXECUTIVE_VARIANT.topSpeed}</span>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">Wheels:</span>
-                  <span className="text-white font-bold">[SPECIFICATION VALUE]</span>
+                  <span className="text-[#777777] block">Braking:</span>
+                  <span className="text-white font-bold">{EXECUTIVE_VARIANT.brakingSystem}</span>
                 </div>
               </div>
             </div>
             <div className="rounded-xl overflow-hidden border border-white/10 aspect-video">
               <img
                 src={HERO_IMAGE}
-                alt="Exterior Aerodynamics"
+                alt="NERO EV Urban Stance"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
@@ -85,25 +84,25 @@ export const VehiclePage: React.FC<VehiclePageProps> = ({ onNavigate, onOpenTest
             <div className="order-2 lg:order-1 rounded-xl overflow-hidden border border-white/10 aspect-video">
               <img
                 src={INTERIOR_IMAGE}
-                alt="Interior Cabin Sanctuary"
+                alt="Starlight Black Cabin & Digital Cluster"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="order-1 lg:order-2">
-              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-2">02. INTERIOR OVERVIEW</span>
-              <h2 className="text-3xl font-extrabold text-white mb-4">DIGITAL COCKPIT SANCTUARY</h2>
+              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-2">02. INTERIOR CABIN</span>
+              <h2 className="text-3xl font-extrabold text-white mb-4">STARLIGHT BLACK CABIN</h2>
               <p className="text-[#777777] text-sm leading-relaxed mb-6">
-                [VEHICLE DESCRIPTION] · Seamless glass curved OLED display spanning across driver and passenger zones, wrapped in sustainable bio-synthetic vegan leather.
+                Features Starlight Black interior theme, full digital instrument cluster, 10.25-inch floating widescreen (17.78 cm embedded LCD screen), and reverse parking sensors.
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs font-mono border-t border-white/10 pt-4">
                 <div>
-                  <span className="text-[#777777] block">Cockpit Display:</span>
-                  <span className="text-[#C6F36B] font-bold">[SPECIFICATION VALUE]</span>
+                  <span className="text-[#777777] block">Seating:</span>
+                  <span className="text-[#C6F36B] font-bold">4 Passengers</span>
                 </div>
                 <div>
-                  <span className="text-[#777777] block">Acoustic Glass:</span>
-                  <span className="text-white font-bold">[SPECIFICATION VALUE]</span>
+                  <span className="text-[#777777] block">Theme:</span>
+                  <span className="text-white font-bold">Starlight Black</span>
                 </div>
               </div>
             </div>
@@ -111,25 +110,25 @@ export const VehiclePage: React.FC<VehiclePageProps> = ({ onNavigate, onOpenTest
         </div>
       </section>
 
-      {/* 4. Color Customizer */}
+      {/* Color Finishes */}
       <VehicleColorCustomizer />
 
-      {/* 5. Performance Showcase */}
+      {/* Performance Highlights */}
       <PerformanceShowcase />
 
-      {/* 6. Range Calculator */}
-      <InteractiveRangeCalculator />
-
-      {/* 7. Structured Specifications */}
+      {/* Technical Specifications Table with Discrepancy Flag */}
       <SpecificationTable />
 
-      {/* 8. Available Variants */}
+      {/* Documented Variant Card */}
       <AvailableVariants
-        onSelectVariant={(vId) => onNavigate('book', vId)}
+        onSelectVariant={() => onNavigate('book')}
         onOpenTestDrive={onOpenTestDrive}
       />
 
-      {/* 9. Enquiry CTA */}
+      {/* EMI Calculator */}
+      <EmiCalculator />
+
+      {/* CTA */}
       <CustomerEnquiryCTA
         onOpenTestDrive={onOpenTestDrive}
         onBookNow={() => onNavigate('book')}

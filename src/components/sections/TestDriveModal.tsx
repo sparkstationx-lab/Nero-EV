@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Calendar, MapPin, User, Mail, Phone, Clock } from 'lucide-react';
-import { EXPERIENCE_CENTERS } from '../../data/placeholderData';
+import { INDIAN_STATES, BRAND } from '../../data/officialData';
 
 interface TestDriveModalProps {
   isOpen: boolean;
@@ -13,9 +13,9 @@ export const TestDriveModal: React.FC<TestDriveModalProps> = ({ isOpen, onClose 
     fullName: '',
     email: '',
     phone: '',
-    city: 'Mumbai',
+    state: INDIAN_STATES[0],
+    city: '',
     preferredDate: '',
-    experienceCenter: EXPERIENCE_CENTERS[0].name,
     comments: '',
   });
 
@@ -46,12 +46,12 @@ export const TestDriveModal: React.FC<TestDriveModalProps> = ({ isOpen, onClose 
             <div className="w-16 h-16 rounded-full bg-[#C6F36B]/20 text-[#C6F36B] flex items-center justify-center mx-auto mb-6 border border-[#C6F36B]/40">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Test Drive Request Received</h3>
-            <p className="text-sm text-[#777777] max-w-md mx-auto mb-6">
-              Thank you! Our NERO Experience Concierge will reach out within 24 hours to confirm your test drive slot in {formData.city}.
+            <h3 className="text-2xl font-bold text-white mb-2">Test Drive Request Logged</h3>
+            <p className="text-xs text-[#777777] max-w-md mx-auto mb-6 leading-relaxed">
+              Thank you! A NERO EV representative will reach out to you via <span className="text-white font-mono">{formData.phone}</span> to confirm your test drive details in {formData.city}.
             </p>
             <div className="bg-[#101010] p-4 rounded-xl border border-white/10 text-xs text-[#C6F36B] font-mono mb-8">
-              REFERENCE SLOT ID: #NERO-TD-{Math.floor(100000 + Math.random() * 900000)}
+              REFERENCE TD ID: #NERO-TD-{Math.floor(100000 + Math.random() * 900000)}
             </div>
             <button
               onClick={resetForm}
@@ -63,29 +63,35 @@ export const TestDriveModal: React.FC<TestDriveModalProps> = ({ isOpen, onClose 
         ) : (
           <div>
             <div className="mb-6">
-              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-1">Schedule Experience</span>
-              <h3 className="text-2xl font-extrabold text-white">Book Your NERO EV Test Drive</h3>
+              <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-1">
+                NERO EV TEST DRIVE
+              </span>
+              <h3 className="text-2xl font-extrabold text-white">Book Your Test Drive</h3>
               <p className="text-xs text-[#777777] mt-1">
-                Select your preferred experience hub and slot to experience the luxury electric performance.
+                Experience NERO EV Executive — Bharat Ki Apni Electric Car in person.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase text-white mb-1.5">Full Name</label>
+                <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                  Full Name <span className="text-[#C6F36B]">*</span>
+                </label>
                 <input
                   type="text"
                   required
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  placeholder="Enter your full name"
+                  placeholder="Enter full name"
                   className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">Email Address</label>
+                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                    Email Address <span className="text-[#C6F36B]">*</span>
+                  </label>
                   <input
                     type="email"
                     required
@@ -97,67 +103,70 @@ export const TestDriveModal: React.FC<TestDriveModalProps> = ({ isOpen, onClose 
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">Mobile Number</label>
+                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                    Mobile Number <span className="text-[#C6F36B]">*</span>
+                  </label>
                   <input
                     type="tel"
                     required
+                    maxLength={10}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+91 98765 43210"
-                    className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
+                    placeholder="10-digit mobile"
+                    className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none font-mono transition-colors"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">City</label>
+                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">State</label>
                   <select
-                    value={formData.city}
-                    onChange={(e) => {
-                      const newCity = e.target.value;
-                      const center = EXPERIENCE_CENTERS.find((c) => c.city === newCity)?.name || EXPERIENCE_CENTERS[0].name;
-                      setFormData({ ...formData, city: newCity, experienceCenter: center });
-                    }}
+                    value={formData.state}
+                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
                   >
-                    {EXPERIENCE_CENTERS.map((c) => (
-                      <option key={c.id} value={c.city} className="bg-[#101010] text-white">
-                        {c.city}
+                    {INDIAN_STATES.map((st) => (
+                      <option key={st} value={st} className="bg-[#101010] text-white">
+                        {st}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">Preferred Date</label>
+                  <label className="block text-xs font-semibold uppercase text-white mb-1.5">
+                    City <span className="text-[#C6F36B]">*</span>
+                  </label>
                   <input
-                    type="date"
+                    type="text"
                     required
-                    value={formData.preferredDate}
-                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                    value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    placeholder="Enter city name"
                     className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase text-white mb-1.5">Nearest Experience Center</label>
+                <label className="block text-xs font-semibold uppercase text-white mb-1.5">Preferred Date</label>
                 <input
-                  type="text"
-                  readOnly
-                  value={formData.experienceCenter}
-                  className="w-full bg-[#101010]/60 border border-white/10 text-[#C6F36B] font-mono text-xs px-4 py-3 rounded cursor-not-allowed"
+                  type="date"
+                  required
+                  value={formData.preferredDate}
+                  onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                  className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase text-white mb-1.5">Additional Notes (Optional)</label>
+                <label className="block text-xs font-semibold uppercase text-white mb-1.5">Comments (Optional)</label>
                 <textarea
                   rows={2}
                   value={formData.comments}
                   onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
-                  placeholder="Tell us any specific features you wish to experience..."
+                  placeholder="Any specific feature or location request..."
                   className="w-full bg-[#101010] border border-white/10 focus:border-[#C6F36B] text-white text-xs px-4 py-3 rounded focus:outline-none transition-colors"
                 />
               </div>
@@ -167,7 +176,7 @@ export const TestDriveModal: React.FC<TestDriveModalProps> = ({ isOpen, onClose 
                   type="submit"
                   className="w-full bg-[#C6F36B] hover:bg-[#b5e656] text-[#101010] font-extrabold text-xs uppercase tracking-wider py-4 rounded transition-all shadow-lg"
                 >
-                  Submit Test Drive Booking Request
+                  Submit Test Drive Request
                 </button>
               </div>
             </form>

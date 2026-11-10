@@ -6,7 +6,7 @@ import { PerformanceShowcase } from '../components/sections/PerformanceShowcase'
 import { InteriorExteriorShowcase } from '../components/sections/InteriorExteriorShowcase';
 import { TechnologySection } from '../components/sections/TechnologySection';
 import { BrandPhilosophy } from '../components/sections/BrandPhilosophy';
-import { GalleryGrid } from '../components/sections/GalleryGrid';
+import { EmiCalculator } from '../components/sections/EmiCalculator';
 import { CustomerEnquiryCTA } from '../components/sections/CustomerEnquiryCTA';
 import { FAQAccordion } from '../components/common/FAQAccordion';
 import { PageId } from '../types';
@@ -30,7 +30,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenTestDrive 
       <InteriorExteriorShowcase />
       <TechnologySection />
       <BrandPhilosophy />
-      <GalleryGrid />
+      <EmiCalculator />
       <CustomerEnquiryCTA
         onOpenTestDrive={onOpenTestDrive}
         onBookNow={() => onNavigate('book')}

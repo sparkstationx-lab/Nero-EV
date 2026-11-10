@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { GALLERY_ITEMS } from '../../data/placeholderData';
+import { GALLERY_ITEMS } from '../../data/officialData';
 import { GalleryItem } from '../../types';
 import { Maximize2, Play, X } from 'lucide-react';
 
 export const GalleryGrid: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'exterior' | 'interior' | 'lifestyle' | 'video'>('all');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'exterior' | 'interior' | 'lifestyle'>('all');
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
-  const filteredItems = GALLERY_ITEMS.filter((item) => {
+  const filteredItems = GALLERY_ITEMS.filter((item: GalleryItem) => {
     if (activeCategory === 'all') return true;
     return item.category === activeCategory;
   });
@@ -20,10 +20,10 @@ export const GalleryGrid: React.FC = () => {
             <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6F36B] font-mono mb-3">
               <span>VISUAL GALLERY</span>
               <span aria-hidden="true">·</span>
-              <span>AESTHETIC PORTFOLIO</span>
+              <span>NERO EV MEDIA PORTFOLIO</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              [VEHICLE IMAGE] GALLERY
+              NERO EV GALLERY
             </h2>
           </div>
 
@@ -47,7 +47,7 @@ export const GalleryGrid: React.FC = () => {
 
         {/* Gallery Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => (
+          {filteredItems.map((item: GalleryItem) => (
             <div
               key={item.id}
               onClick={() => setSelectedImage(item)}
@@ -78,26 +78,6 @@ export const GalleryGrid: React.FC = () => {
             </div>
           ))}
         </div>
-
-        {/* Video Showcase Placeholder Block */}
-        <div className="mt-12 bg-[#161616] rounded-2xl border border-white/10 p-8 sm:p-12 relative overflow-hidden group">
-          <div className="relative z-10 max-w-xl">
-            <span className="text-xs font-mono uppercase text-[#C6F36B] block mb-2">CINEMATIC FILM SHOWCASE</span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
-              [VEHICLE IMAGE PLACEHOLDER] — CINEMATIC REVEAL FILM
-            </h3>
-            <p className="text-xs text-[#777777] leading-relaxed mb-6">
-              [VEHICLE DESCRIPTION] · Full ultra-high definition official launch film showcase placeholder for NERO EV.
-            </p>
-            <button
-              onClick={() => setSelectedImage(GALLERY_ITEMS[0])}
-              className="bg-[#C6F36B] hover:bg-[#b5e656] text-[#101010] font-bold text-xs uppercase px-6 py-3 rounded transition-all flex items-center gap-2"
-            >
-              <Play className="w-4 h-4 fill-current" />
-              <span>Watch Video Reveal Preview</span>
-            </button>
-          </div>
-        </div>
       </div>
 
       {/* Lightbox Modal */}
@@ -121,7 +101,7 @@ export const GalleryGrid: React.FC = () => {
             </div>
             <div className="flex items-center justify-between text-xs text-white px-2">
               <span className="font-mono text-[#C6F36B]">{selectedImage.title}</span>
-              <span className="text-[#777777] font-mono">PHASE 1 VISUAL ASSET</span>
+              <span className="text-[#777777] font-mono">NERO EV OFFICIAL MEDIA</span>
             </div>
           </div>
         </div>

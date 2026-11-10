@@ -1,15 +1,17 @@
-export type PageId = 'home' | 'vehicle' | 'about' | 'gallery' | 'contact' | 'book';
+export type PageId = 'home' | 'vehicle' | 'about' | 'gallery' | 'contact' | 'book' | 'emi';
 
 export interface VehicleVariant {
   id: string;
   name: string;
   badge: string;
-  pricePlaceholder: string;
-  acceleration: string;
-  topSpeed: string;
+  priceFormatted: string;
+  priceRaw: number;
+  priceLabelNote: string;
   range: string;
-  peakPower: string;
-  driveTrain: string;
+  chargingTime: string;
+  topSpeed: string;
+  seatingCapacity: number;
+  brakingSystem: string;
   features: string[];
 }
 
@@ -17,15 +19,16 @@ export interface SpecificationCategory {
   category: string;
   items: {
     label: string;
-    valuePlaceholder: string;
-    unit?: string;
+    value: string;
+    note?: string;
+    isDiscrepancy?: boolean;
   }[];
 }
 
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'all' | 'exterior' | 'interior' | 'lifestyle' | 'video';
+  category: 'all' | 'exterior' | 'interior' | 'lifestyle';
   image: string;
   aspectRatio?: '16:9' | '4:3' | '1:1';
 }
@@ -36,28 +39,22 @@ export interface TestDriveFormData {
   phone: string;
   city: string;
   preferredDate: string;
-  experienceCenter: string;
-  comments: string;
+  comments?: string;
 }
 
 export interface BookingFormData {
-  selectedVariantId: string;
-  selectedColor: string;
-  city: string;
-  experienceCenter: string;
-  fullName: string;
-  email: string;
+  firstName: string;
+  lastName: string;
   phone: string;
-  pinCode: string;
-  paymentMethod: 'token' | 'full';
-  termsAccepted: boolean;
+  email: string;
+  state: string;
+  city: string;
+  preferredColor: string;
 }
 
-export interface ExperienceCenter {
-  id: string;
-  city: string;
-  name: string;
-  addressPlaceholder: string;
-  phonePlaceholder: string;
-  hoursPlaceholder: string;
+export interface EmiCalculationResult {
+  monthlyEmi: number;
+  totalInterest: number;
+  totalPayment: number;
+  principalAmount: number;
 }

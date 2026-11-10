@@ -1,41 +1,40 @@
-import React, { useState } from 'react';
-import { Gauge, Zap, Wind, ShieldCheck, Check } from 'lucide-react';
-import { CHASSIS_IMAGE } from '../../data/placeholderData';
+import React from 'react';
+import { Gauge, BatteryCharging, Clock, Users, Disc, ShieldCheck } from 'lucide-react';
+import { EXECUTIVE_VARIANT, SIDE_PROFILE_IMAGE } from '../../data/officialData';
 
 export const PerformanceShowcase: React.FC = () => {
-  const [activeDriveMode, setActiveDriveMode] = useState<'eco' | 'gt' | 'track'>('gt');
-
-  const modeData = {
-    eco: {
-      title: 'ECO RANGE MODE',
-      range: '[SPECIFICATION VALUE: XXX KM]',
-      accel: '[SPECIFICATION VALUE: 0-100 IN X.X S]',
-      topSpeed: '[SPECIFICATION VALUE: XXX KM/H]',
-      powerRatio: 'Rear Motor 100%',
-      suspension: 'Comfort Air Suspension',
-      desc: 'Optimized for maximum efficiency, energy regeneration, and extended city cruising.',
+  const metrics = [
+    {
+      label: 'CLAIMED DRIVING RANGE',
+      value: EXECUTIVE_VARIANT.range,
+      subtext: 'Per full charge',
+      icon: BatteryCharging,
     },
-    gt: {
-      title: 'GT SPORT MODE',
-      range: '[SPECIFICATION VALUE: XXX KM]',
-      accel: '[SPECIFICATION VALUE: 0-100 IN X.X S]',
-      topSpeed: '[SPECIFICATION VALUE: XXX KM/H]',
-      powerRatio: 'Dual Motor AWD 40:60',
-      suspension: 'Adaptive Dynamic Damping',
-      desc: 'Instant torque response, balanced AWD traction, and effortless highway overtaking power.',
+    {
+      label: 'MAXIMUM TOP SPEED',
+      value: EXECUTIVE_VARIANT.topSpeed,
+      subtext: 'Optimized for city driving',
+      icon: Gauge,
     },
-    track: {
-      title: 'NERO TRACK LAUNCH',
-      range: '[SPECIFICATION VALUE: XXX KM]',
-      accel: '[SPECIFICATION VALUE: 0-100 IN X.X S]',
-      topSpeed: '[SPECIFICATION VALUE: XXX KM/H]',
-      powerRatio: 'Dual Motor Vectoring 0:100',
-      suspension: 'Stiffened Track Geometry',
-      desc: 'Full battery pack power unlock, active rear torque vectoring, and launch control.',
+    {
+      label: 'FULL CHARGING TIME',
+      value: EXECUTIVE_VARIANT.chargingTime,
+      subtext: 'Standard AC home charging',
+      icon: Clock,
     },
-  };
-
-  const currentMode = modeData[activeDriveMode];
+    {
+      label: 'PASSENGER CAPACITY',
+      value: '4 Seats',
+      subtext: 'Family-oriented layout',
+      icon: Users,
+    },
+    {
+      label: 'BRAKING ARCHITECTURE',
+      value: 'Front & Rear Disc',
+      subtext: '4-wheel responsive discs',
+      icon: Disc,
+    },
+  ];
 
   return (
     <section className="py-24 bg-[#101010] text-[#F7F7F5] border-t border-white/5 relative">
@@ -43,109 +42,81 @@ export const PerformanceShowcase: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#C6F36B] font-mono mb-3">
-              <span>03. PERFORMANCE & DYNAMICS</span>
+              <span>03. PERFORMANCE & SPECS</span>
               <span aria-hidden="true">·</span>
-              <span>POWERTRAIN SHOWCASE</span>
+              <span>NUMERICAL HIGHLIGHTS</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              [BRAND HEADLINE] <br />
-              UNCOMPROMISED ELECTRIC THRUST
+              NERO EV AT A GLANCE
             </h2>
           </div>
           <p className="text-[#777777] text-sm max-w-md leading-relaxed">
-            [VEHICLE DESCRIPTION] · Dual permanent magnet synchronous electric motors operating on a dedicated skateboard chassis.
+            Essential performance parameters documented on official NERO EV releases.
           </p>
         </div>
 
-        {/* Interactive Drive Mode Switcher */}
-        <div className="bg-[#161616] rounded-2xl border border-white/10 p-6 sm:p-10 mb-12">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
-            <div>
-              <span className="text-xs uppercase font-mono text-[#C6F36B] block mb-1">Interactive Selector</span>
-              <h3 className="text-xl sm:text-2xl font-bold text-white">Select Drive Mode Simulation</h3>
-            </div>
+        {/* Large Numerical Highlights Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {metrics.map((m, idx) => {
+            const IconComp = m.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-[#161616] p-8 rounded-2xl border border-white/10 hover:border-[#C6F36B]/50 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#C6F36B]">
+                      {m.label}
+                    </span>
+                    <div className="w-8 h-8 rounded bg-[#C6F36B]/10 text-[#C6F36B] flex items-center justify-center">
+                      <IconComp className="w-4 h-4" />
+                    </div>
+                  </div>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight mb-2">
+                    {m.value}
+                  </div>
+                </div>
+                <div className="text-xs text-[#777777] font-mono pt-4 border-t border-white/5">
+                  {m.subtext}
+                </div>
+              </div>
+            );
+          })}
 
-            {/* Mode Tabs */}
-            <div className="flex items-center gap-2 bg-[#101010] p-1.5 rounded-lg border border-white/10 w-full sm:w-auto">
-              <button
-                onClick={() => setActiveDriveMode('eco')}
-                className={`flex-1 sm:flex-none px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${
-                  activeDriveMode === 'eco'
-                    ? 'bg-[#C6F36B] text-[#101010] shadow-lg'
-                    : 'text-[#777777] hover:text-white'
-                }`}
-              >
-                Eco Range
-              </button>
-              <button
-                onClick={() => setActiveDriveMode('gt')}
-                className={`flex-1 sm:flex-none px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${
-                  activeDriveMode === 'gt'
-                    ? 'bg-[#C6F36B] text-[#101010] shadow-lg'
-                    : 'text-[#777777] hover:text-white'
-                }`}
-              >
-                GT Sport
-              </button>
-              <button
-                onClick={() => setActiveDriveMode('track')}
-                className={`flex-1 sm:flex-none px-5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${
-                  activeDriveMode === 'track'
-                    ? 'bg-[#C6F36B] text-[#101010] shadow-lg'
-                    : 'text-[#777777] hover:text-white'
-                }`}
-              >
-                Track Launch
-              </button>
+          {/* Pricing Highlight Card */}
+          <div className="bg-gradient-to-br from-[#161616] to-[#222222] p-8 rounded-2xl border border-[#C6F36B]/40 flex flex-col justify-between shadow-xl">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#C6F36B]">
+                  WEBSITE-LISTED PRICE
+                </span>
+                <span className="text-[10px] font-mono text-[#101010] bg-[#C6F36B] px-2 py-0.5 rounded font-bold">
+                  EXECUTIVE
+                </span>
+              </div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#C6F36B] font-mono tracking-tight mb-2">
+                {EXECUTIVE_VARIANT.priceFormatted}
+              </div>
+            </div>
+            <div className="text-[11px] text-[#777777] leading-relaxed pt-4 border-t border-white/10">
+              * Official website listed price (Subject to manufacturer breakup confirmation).
             </div>
           </div>
+        </div>
 
-          {/* Mode Display Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 items-center">
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs font-mono bg-[#C6F36B]/10 text-[#C6F36B] px-3 py-1 rounded border border-[#C6F36B]/20 font-bold">
-                  {currentMode.title}
-                </span>
-                <span className="text-xs text-[#777777] font-mono">[TECHNICAL SPECIFICATIONS]</span>
-              </div>
-              <p className="text-white text-base sm:text-lg mb-8 font-light leading-relaxed">
-                {currentMode.desc}
-              </p>
-
-              {/* Dynamic Telemetry Specs */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="bg-[#101010] p-4 rounded-xl border border-white/5">
-                  <span className="text-xs text-[#777777] uppercase font-mono block mb-1">Estimated Range</span>
-                  <span className="text-lg font-bold text-[#C6F36B] font-mono tabular-nums">{currentMode.range}</span>
-                </div>
-                <div className="bg-[#101010] p-4 rounded-xl border border-white/5">
-                  <span className="text-xs text-[#777777] uppercase font-mono block mb-1">0-100 km/h</span>
-                  <span className="text-lg font-bold text-white font-mono tabular-nums">{currentMode.accel}</span>
-                </div>
-                <div className="bg-[#101010] p-4 rounded-xl border border-white/5">
-                  <span className="text-xs text-[#777777] uppercase font-mono block mb-1">Torque Split</span>
-                  <span className="text-sm font-semibold text-white truncate block">{currentMode.powerRatio}</span>
-                </div>
-                <div className="bg-[#101010] p-4 rounded-xl border border-white/5">
-                  <span className="text-xs text-[#777777] uppercase font-mono block mb-1">Damping</span>
-                  <span className="text-sm font-semibold text-white truncate block">{currentMode.suspension}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Platform Image Showcase */}
-            <div className="relative rounded-xl overflow-hidden border border-white/10 aspect-video lg:aspect-square">
-              <img
-                src={CHASSIS_IMAGE}
-                alt="NERO EV Drive Mode Platform View"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                <span className="text-xs font-mono text-[#C6F36B]">[CHASSIS ARCHITECTURE PLACEHOLDER]</span>
-              </div>
-            </div>
+        {/* Side Profile Image Banner */}
+        <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video lg:aspect-3/1">
+          <img
+            src={SIDE_PROFILE_IMAGE}
+            alt="NERO EV Side Profile Performance View"
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+            <span className="text-xs font-mono text-[#C6F36B] uppercase font-bold">
+              NERO EV COMPACT URBAN CHASSIS WITH DUAL DISC BRAKES
+            </span>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Zap } from 'lucide-react';
 import { PageId } from '../../types';
+import { BRAND } from '../../data/officialData';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -29,6 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
     { id: 'vehicle', label: 'Vehicle' },
     { id: 'about', label: 'About Us' },
     { id: 'gallery', label: 'Gallery' },
+    { id: 'emi', label: 'EMI Calculator' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -42,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#101010]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+          ? 'bg-[#101010]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
           : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5'
       }`}
     >
@@ -50,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
         {/* Zone 1: Single Brand Wordmark */}
         <button
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-2 text-[#F7F7F5] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F36B] rounded-sm"
+          className="flex items-center gap-2 text-[#F7F7F5] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6F36B] rounded-sm shrink-0"
         >
           <div className="w-8 h-8 rounded bg-[#C6F36B] flex items-center justify-center text-[#101010] font-extrabold text-sm tracking-tighter">
             <Zap className="w-5 h-5 fill-current" />
@@ -61,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
         </button>
 
         {/* Zone 2: 4-5 Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
@@ -122,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`text-left text-lg font-medium py-2 border-b border-white/5 transition-colors ${
+              className={`text-left text-base font-medium py-2 border-b border-white/5 transition-colors ${
                 currentPage === item.id ? 'text-[#C6F36B] font-bold' : 'text-[#F7F7F5]/80'
               }`}
             >
@@ -135,13 +137,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenT
                 setMobileMenuOpen(false);
                 onOpenTestDrive();
               }}
-              className="w-full border border-white/20 hover:border-white text-white text-center font-semibold text-sm uppercase py-3 rounded transition-colors"
+              className="w-full border border-white/20 hover:border-white text-white text-center font-semibold text-xs uppercase py-3 rounded transition-colors"
             >
               Request Test Drive
             </button>
             <button
               onClick={() => handleNavClick('book')}
-              className="w-full bg-[#C6F36B] hover:bg-[#b5e656] text-[#101010] text-center font-bold text-sm uppercase py-3 rounded transition-colors"
+              className="w-full bg-[#C6F36B] hover:bg-[#b5e656] text-[#101010] text-center font-bold text-xs uppercase py-3 rounded transition-colors"
             >
               Book Now
             </button>
