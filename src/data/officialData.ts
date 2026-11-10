@@ -1,9 +1,13 @@
 import { VehicleVariant, SpecificationCategory, GalleryItem } from '../types';
+import heroImage from '../assets/images/nero_ev_hero_exterior_1794325808320.jpg';
+import interiorImage from '../assets/images/nero_ev_interior_dashboard_1794325806309.jpg';
+import sideProfileImage from '../assets/images/nero_ev_side_profile_1794325809408.jpg';
+import chargingImage from '../assets/images/nero_ev_charging_station_1794325809193.jpg';
 
-export const HERO_IMAGE = '/src/assets/images/nero_ev_hero_exterior_1794325808320.jpg';
-export const INTERIOR_IMAGE = '/src/assets/images/nero_ev_interior_dashboard_1794325806309.jpg';
-export const SIDE_PROFILE_IMAGE = '/src/assets/images/nero_ev_side_profile_1794325809408.jpg';
-export const CHARGING_IMAGE = '/src/assets/images/nero_ev_charging_station_1794325809193.jpg';
+export const HERO_IMAGE = heroImage;
+export const INTERIOR_IMAGE = interiorImage;
+export const SIDE_PROFILE_IMAGE = sideProfileImage;
+export const CHARGING_IMAGE = chargingImage;
 
 export const BRAND = {
   name: 'NERO EV',
