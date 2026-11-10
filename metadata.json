@@ -1,0 +1,6 @@
+{
+  "name": "NERO EV — Premium Electric Mobility",
+  "description": "The future of Indian electric performance and luxury vehicles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
